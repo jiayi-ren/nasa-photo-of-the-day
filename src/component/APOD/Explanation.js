@@ -1,9 +1,14 @@
 import React from "react"
+import styled from "styled-components"
 
 const Explanation = props =>{
 
+    const StyledExplanation = styled.p`
+        
+    `;
+
     return (
-        <p>{props.explanation}</p>
+        <StyledExplanation>{props.explanation}</StyledExplanation>
     );
 };
 

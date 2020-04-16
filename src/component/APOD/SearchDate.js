@@ -1,4 +1,5 @@
 import React, {useState} from "react"
+import styled from "styled-components"
 
 const SearchDate = ({setDate}) =>{
 
@@ -18,15 +19,22 @@ const SearchDate = ({setDate}) =>{
         return null
     }
 
+    const StyledSearch = styled.div`
+        margin: auto 200px;
+        padding: 10px 0; 
+        border:  5px dashed grey;
+        border-radius: 20px;
+    `;
+
     return (
-        <div>
-            <form onSubmit={submitSearch}>Select a date<br></br>
+        <StyledSearch>
+            <form onSubmit={submitSearch}>Have more fun, pick another date<br></br>
             <input 
                 type="date"
                 onChange={changeHandler}></input>
                 <input type="submit" value="Submit"></input>
             </form>
-        </div>
+        </StyledSearch>
     )
 };
 
