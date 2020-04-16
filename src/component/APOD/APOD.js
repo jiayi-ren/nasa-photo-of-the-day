@@ -5,6 +5,7 @@ import Date from "./Date.js";
 import Image from "./Image.js";
 import Explanation from "./Explanation.js";
 import Copyright from "./Copyright.js";
+import SearchDate from "./SearchDate.js";
 
 const APOD = props =>{
 
@@ -40,6 +41,14 @@ const APOD = props =>{
     // );
     //////////////////////////////////////////////////
     const [apodData, setApodData] = useState("")
+    const [date, setDate] = useState("")
+
+    const getAPODbyDate = () =>{
+        return function(){
+            const newDate = date
+            return newDate
+        }
+    }
 
     useEffect( ()=>{
         axios.get(`${apod_url}?api_key=${api_key}`)
@@ -51,11 +60,23 @@ const APOD = props =>{
             })
     },[])
 
+    useEffect(() =>{
+        axios.get(`${apod_url}?api_key=${api_key}&date=${date}`)
+            .then(res =>{
+                setApodData(res.data)
+            })
+            .catch(err =>{
+                console.log(err)
+            })
+    },[date])
+
     return (
         <div>
             <h2>Astronomy Picture of the Day</h2>
-            <Date date={apodData.date}/>
-            <Image image={apodData.hdurl}/>
+            <SearchDate setDate={setDate}/>
+            <Date date={apodData.date} newDate={date}/>
+            <h3>{apodData.title}</h3>
+            <Image image={apodData.url}/>
             <Copyright copyright={apodData.copyright}/>
             <Explanation explanation={apodData.explanation}/>
         </div>
